@@ -1,3 +1,4 @@
+
 /* SDSLib, A C dynamic strings library
  *
  * Copyright (c) 2006-2010, Salvatore Sanfilippo <antirez at gmail dot com>
@@ -26,6 +27,8 @@
  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
+ * 
+ * sds 表示 simple dynamic strings,即简单动态字符串.
  */
 
 #ifndef __SDS_H
@@ -39,8 +42,8 @@
 typedef char *sds;
 
 struct sdshdr {
-    unsigned int len;
-    unsigned int free;
+    unsigned int len;  /* 记录buf数组中已使用的字节的数量;用这份空间换strlen(buf)的时间，O(n)->O(1) */
+    unsigned int free; /* 记录buf数组中未使用的字节的数量 */
     char buf[];
 };
 
